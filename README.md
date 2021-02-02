@@ -1,6 +1,6 @@
 # Z1-AggressorScripts
 
-![](https://img.shields.io/badge/Z1-AggressorScripts-red.svg) ![](https://img.shields.io/github/languages/top/z1un/Z1-AggressorScripts. svg) ![](https://badgen.net/github/stars/z1un/Z1-AggressorScripts)
+![](https://img.shields.io/badge/Z1-AggressorScripts-red.svg) ![](https://img.shields.io/github/languages/top/z1un/Z1-AggressorScripts.svg) ![](https://badgen.net/github/stars/z1un/Z1-AggressorScripts)
 
 Applicable to Cobalt Strike 3.x & 4.x plug-ins.
 
