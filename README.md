@@ -227,4 +227,4 @@ Applicable to Cobalt Strike 3.x & 4.x plug-ins.
    -[SharpDecryptPwd](https://github.com/RcoIl/SharpDecryptPwd)(from RcoIl)
 
      ```
-     This program is mainly for
+     This program is mainly 
