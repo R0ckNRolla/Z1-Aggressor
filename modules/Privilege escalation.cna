@@ -1,9 +1,9 @@
-menu "提权" {
-	item "Watson(获取可提权漏洞)" {
+menu "privilege escalation" {
+	item "Watson(Access to privilege escalation vulnerability)" {
 		$bid = $1;
 		$dialog = dialog("Watson", %(bid => $bid), &Watson);
-		dialog_description($dialog, "获取可用于提权的漏洞。支持Windows 10 1507、1511、1607、1703、1709、1803、1809、1903、1909、2004、Server 2016和2019。项目地址：https://github.com/rasta-mouse/Watson");
-    dbutton_action($dialog, "运行");
+		dialog_description($dialog, "Obtain vulnerabilities that can be used to escalate rights. Support Windows 10 1507、1511、1607、1703、1709、1803、1809、1903、1909、2004、Server 2016 with 2019. project address：https://github.com/rasta-mouse/Watson");
+    dbutton_action($dialog, "run");
 		dialog_show($dialog);
   }
   sub Watson {
@@ -15,7 +15,7 @@ menu "提权" {
     $Dialog = dialog("Sweet Potato",%(bid => $bid),&SweetPotato);
     dialog_description($Dialog, "MS16-075");
     drow_listener($Dialog, "listener", "Listener: ");
-    dbutton_action($Dialog, "运行");
+    dbutton_action($Dialog, "run");
     dialog_show($Dialog);
   }
   sub SweetPotato {
@@ -39,7 +39,7 @@ menu "提权" {
     $Dialog = dialog("juicypotato",%(bid => $bid),&juicypotato);
     dialog_description($Dialog, "juicypotato(ms16-075)");
     drow_listener($Dialog, "listener", "Listener: ");
-    dbutton_action($Dialog, "运行");
+    dbutton_action($Dialog, "run");
     dialog_show($Dialog);
   }
   sub juicypotato {
@@ -61,7 +61,7 @@ menu "提权" {
     $Dialog = dialog("MS14-058",%(bid => $bid),&ms14_058_exploit);
     dialog_description($Dialog, "MS14-058");
     drow_listener($Dialog, "listener", "Listener: ");
-    dbutton_action($Dialog, "运行");
+    dbutton_action($Dialog, "run");
     dialog_show($Dialog);
   }
   sub ms14_058_exploit {
@@ -84,7 +84,7 @@ menu "提权" {
     $Dialog = dialog("MS15-051",%(bid => $bid),&ms15_051_exploit);
     dialog_description($Dialog, "MS15-051");
     drow_listener($Dialog, "listener", "Listener: ");
-    dbutton_action($Dialog, "运行");
+    dbutton_action($Dialog, "run");
     dialog_show($Dialog);
   }
   sub ms15_051_exploit {
@@ -111,7 +111,7 @@ menu "提权" {
     $Dialog = dialog("MS16-016",%(bid => $bid),&ms16_016_exploit);
     dialog_description($Dialog, "MS16-016");
     drow_listener($Dialog, "listener", "Listener: ");
-    dbutton_action($Dialog, "运行");
+    dbutton_action($Dialog, "run");
     dialog_show($Dialog);
   }
   sub ms16_016_exploit {
@@ -130,7 +130,7 @@ menu "提权" {
     $Dialog = dialog("MS16-032",%(bid => $bid),&ms16_032_exploit);
     dialog_description($Dialog, "MS16-032");
     drow_listener($Dialog, "listener", "Listener: ");
-    dbutton_action($Dialog, "运行");
+    dbutton_action($Dialog, "run");
     dialog_show($Dialog);
   }
   sub ms16_032_exploit {
@@ -148,7 +148,7 @@ menu "提权" {
     $Dialog = dialog("MS16-135",%(bid => $bid),&ms16_135_exploit);
     dialog_description($Dialog, "MS16-135");
     drow_listener($Dialog, "listener", "Listener: ");
-    dbutton_action($Dialog, "运行");
+    dbutton_action($Dialog, "run");
     dialog_show($Dialog);
   }
   sub ms16_135_exploit {
@@ -167,7 +167,7 @@ menu "提权" {
     $Dialog = dialog("cve_2020_0796_exploit",%(bid => $bid),&cve_2020_0796_exploit);
     dialog_description($Dialog, "Windows 10 versions 1903 - 1909");
     drow_listener($Dialog, "listener", "Listener: ");
-    dbutton_action($Dialog, "运行");
+    dbutton_action($Dialog, "run");
     dialog_show($Dialog);
   }
   sub cve_2020_0796_exploit {
@@ -191,10 +191,10 @@ menu "提权" {
 	item "SharpBypassUAC"{
 		$bid = $1;
 		$dialog = dialog("BypassUAC", %(cmd => "VALUE Base64 encoded command to execute",type => "eventvwr",bid => $bid), &BypassUAC);
-		dialog_description($dialog, "命令需进行base64编码,如:Y21kIC9jIHN0YXJ0IGNhbGMuZXhl,dikcleanup的命令必须以' && REM'结尾,如:Y21kIC9jIHN0YXJ0IGNhbGMuZXhlICYmIFJFTQ ==。项目地址：https://github.com/FatRodzianko/SharpBypassUAC");
+		dialog_description($dialog, "Order base64Encoding, such as:Y21kIC9jIHN0YXJ0IGNhbGMuZXhl,dikcleanup The order must start with' && REM' Ending like:Y21kIC9jIHN0YXJ0IGNhbGMuZXhlICYmIFJFTQ ==. project address：https://github.com/FatRodzianko/SharpBypassUAC");
 		drow_text($dialog, "cmd", "command:  ");
 		drow_combobox($dialog, "type", "type:", @("eventvwr", "fodhelper","computerdefaults","sdclt","slui","dikcleanup"));
-		dbutton_action($dialog, "运行");
+		dbutton_action($dialog, "run");
 		dialog_show($dialog);
   }
   sub BypassUAC {
